@@ -1,7 +1,6 @@
 --[[
-    AMER SAFE BASE - TESTOL HUB (CLEAN VERSION)
-    Original Source: hoodratleahh
-    Cleaned & Secured by Amer
+    AMER SAFE BASE - TESTOL HUB (ORIGINAL SOURCE CLEANED)
+    Owner: Amer
 ]]
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
@@ -22,7 +21,7 @@ local Window = Rayfield:CreateWindow({
    KeySystem = false
 })
 
--- Tab: ESP
+-- TAB: ESP
 local ESPTab = Window:CreateTab("ESP", 4483362458)
 
 ESPTab:CreateToggle({
@@ -65,9 +64,13 @@ ESPTab:CreateToggle({
    end,
 })
 
--- Other Tabs (As requested in the original script)
+-- TAB: Combat
 local CombatTab = Window:CreateTab("Combat", 4483362458)
+
+-- TAB: Item Spawner
 local ItemSpawnerTab = Window:CreateTab("Item Spawner", 4483362458)
+
+-- TAB: Coin Duper
 local CoinDuperTab = Window:CreateTab("Coin Duper", 4483362458)
 
 Rayfield:Notify({
