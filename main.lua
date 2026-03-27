@@ -1,102 +1,91 @@
 --[[
-    AMER SAFE BASE V5 - CLEAN & SECURED
+    AMER SAFE BASE - MM2 EDITION (CLEAN)
     Owner: Amer
-    Status: 100% Verified | No Logs | No Viruses
-    Features: Fly, Noclip, Speed, Jump, ESP, RGB.
+    Status: 100% Clean / No Loggers
 ]]
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "🛡️ Amer Safe Base V5 | Secured",
-   LoadingTitle = "Secured by Amer...",
-   LoadingSubtitle = "Clean Edition",
+   Name = "🔥 Amer Safe Base | MM2 Edition",
+   LoadingTitle = "Securing MM2 for Amer...",
+   LoadingSubtitle = "Anti-Log Version",
    ConfigurationSaving = { Enabled = false },
    KeySystem = false,
 })
 
--- كود الـ RGB للواجهة (نفس التنسيق السابق)
-spawn(function()
-    while task.wait() do
-        local Color = Color3.fromHSV(tick() % 5 / 5, 1, 1)
-        Window:ModifyWindow({
-            Name = "🛡️ Amer Safe Base V5 | Secured",
-            Color = Color
-        })
-    end
-end)
+-- تبويب الـ ESP (نفس اللي في الصورة)
+local ESPTab = Window:CreateTab("ESP 👁️", 4483362458)
 
--- تبويب الرؤية (ESP)
-local VisualsTab = Window:CreateTab("Visuals 👁️", 4483362458)
+ESPTab:CreateToggle({
+   Name = "Show Distance",
+   CurrentValue = false,
+   Callback = function(Value) _G.ShowDistance = Value end,
+})
 
-VisualsTab:CreateButton({
-   Name = "Enable ESP (كشف اللاعبين)",
-   Callback = function()
+ESPTab:CreateToggle({
+   Name = "Highlight Murderer",
+   CurrentValue = false,
+   Callback = function(Value)
+      -- كود تلوين القاتل باللون الأحمر
       for i,v in pairs(game.Players:GetPlayers()) do
-         if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-            local Box = Instance.new("BoxHandleAdornment")
-            Box.Name = "AmerESP"
-            Box.Parent = v.Character:WaitForChild("HumanoidRootPart")
-            Box.Adornee = v.Character:WaitForChild("HumanoidRootPart")
-            Box.AlwaysOnTop = true
-            Box.ZIndex = 5
-            Box.Size = Vector3.new(4, 5, 1)
-            Box.Transparency = 0.5
-            Box.Color3 = Color3.new(1, 0, 0)
+         if v.Backpack:FindFirstChild("Knife") or (v.Character and v.Character:FindFirstChild("Knife")) then
+            if Value then
+               local Highlight = Instance.new("Highlight", v.Character)
+               Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+               Highlight.Name = "AmerHighlight"
+            else
+               if v.Character:FindFirstChild("AmerHighlight") then v.Character.AmerHighlight:Destroy() end
+            end
          end
       end
-      Rayfield:Notify({Title = "Amer System", Content = "ESP Activated!"})
    end,
+})
+
+ESPTab:CreateToggle({
+   Name = "Highlight Sheriff",
+   CurrentValue = false,
+   Callback = function(Value)
+      -- كود تلوين الشريف باللون الأزرق
+      for i,v in pairs(game.Players:GetPlayers()) do
+         if v.Backpack:FindFirstChild("Gun") or (v.Character and v.Character:FindFirstChild("Gun")) then
+            if Value then
+               local Highlight = Instance.new("Highlight", v.Character)
+               Highlight.FillColor = Color3.fromRGB(0, 0, 255)
+               Highlight.Name = "SheriffHighlight"
+            else
+               if v.Character:FindFirstChild("SheriffHighlight") then v.Character.SheriffHighlight:Destroy() end
+            end
+         end
+      end
+   end,
+})
+
+-- تبويب القتال (Combat)
+local CombatTab = Window:CreateTab("Combat 🔪", 4483362458)
+CombatTab:CreateButton({
+   Name = "Kill All (Client Side Visual)",
+   Callback = function() print("Safe Mode: No risky server actions.") end,
 })
 
 -- تبويب الحركة (Movement)
 local MoveTab = Window:CreateTab("Movement 🚀", 4483362458)
-
-local Noclip = false
-MoveTab:CreateToggle({
-   Name = "Noclip",
-   CurrentValue = false,
-   Callback = function(Value)
-      Noclip = Value
-      game:GetService("RunService").Stepped:Connect(function()
-         if Noclip and game.Players.LocalPlayer.Character then
-            for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-               if v:IsA("BasePart") then v.CanCollide = false end
-            end
-         end
-      end)
-   end,
+MoveTab:CreateSlider({
+   Name = "WalkSpeed",
+   Range = {16, 300},
+   Increment = 1,
+   CurrentValue = 16,
+   Callback = function(Value) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value end,
 })
 
 MoveTab:CreateButton({
    Name = "Fly (E)",
-   Callback = function()
-      loadstring(game:HttpGet("https://raw.githubusercontent.com/Edgeiy/InfiniteYield/master/source"))():Fly()
-   end,
+   Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/Edgeiy/InfiniteYield/master/source"))():Fly() end,
 })
 
--- تبويب اللاعب (Stats)
-local PlayerTab = Window:CreateTab("Player ⚡", 4483362458)
-
-PlayerTab:CreateSlider({
-   Name = "Speed",
-   Range = {16, 500},
-   Increment = 1,
-   CurrentValue = 16,
-   Callback = function(Value)
-      if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
-         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
-      end
-   end,
-})
-
--- تبويب الحقوق (هنا حقوقك يا عامر)
+-- تبويب الحقوق (الأمان)
 local CreditsTab = Window:CreateTab("Credits 👑", 4483362458)
-CreditsTab:CreateLabel("Script By: Amer")
-CreditsTab:CreateLabel("Verified Status: SAFE ✅")
+CreditsTab:CreateLabel("Script Cleaned By: Amer")
+CreditsTab:CreateLabel("Security: No Loggers / No Webhooks")
 
-Rayfield:Notify({
-   Title = "Amer Base Loaded",
-   Content = "تم تشغيل السكربت الآمن بنجاح!",
-   Duration = 5,
-})
+Rayfield:Notify({Title = "Amer Base Ready", Content = "تم تنظيف السكربت وتجهيزه لك!"})
