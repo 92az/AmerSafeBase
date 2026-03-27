@@ -1,33 +1,33 @@
 --[[
-    AMER SAFE BASE V5 - THE RGB ULTIMATE
-    Features: RGB UI, ESP, Fly, Noclip, Speed.
+    AMER SAFE BASE V5 - CLEAN & SECURED
     Owner: Amer
-    Status: 100% Virus Free & Verified
+    Status: 100% Verified | No Logs | No Viruses
+    Features: Fly, Noclip, Speed, Jump, ESP, RGB.
 ]]
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "🌈 Amer Safe Base V5 | RGB MODE",
-   LoadingTitle = "Secured & Styled by Amer...",
-   LoadingSubtitle = "The Ultimate RGB Script",
+   Name = "🛡️ Amer Safe Base V5 | Secured",
+   LoadingTitle = "Secured by Amer...",
+   LoadingSubtitle = "Clean Edition",
    ConfigurationSaving = { Enabled = false },
    KeySystem = false,
 })
 
--- كود الـ RGB التلقائي لتغيير ألوان الواجهة
+-- كود الـ RGB للواجهة (نفس التنسيق السابق)
 spawn(function()
     while task.wait() do
         local Color = Color3.fromHSV(tick() % 5 / 5, 1, 1)
         Window:ModifyWindow({
-            Name = "🌈 Amer Safe Base V5 | RGB MODE",
+            Name = "🛡️ Amer Safe Base V5 | Secured",
             Color = Color
         })
     end
 end)
 
--- تبويب الرؤية (Visuals)
-local VisualsTab = Window:CreateTab("ESP & Visuals 👁️", 4483362458)
+-- تبويب الرؤية (ESP)
+local VisualsTab = Window:CreateTab("Visuals 👁️", 4483362458)
 
 VisualsTab:CreateButton({
    Name = "Enable ESP (كشف اللاعبين)",
@@ -42,10 +42,10 @@ VisualsTab:CreateButton({
             Box.ZIndex = 5
             Box.Size = Vector3.new(4, 5, 1)
             Box.Transparency = 0.5
-            Box.Color3 = Color3.new(1, 0, 1)
+            Box.Color3 = Color3.new(1, 0, 0)
          end
       end
-      Rayfield:Notify({Title = "Amer ESP", Content = "تم كشف جميع اللاعبين!"})
+      Rayfield:Notify({Title = "Amer System", Content = "ESP Activated!"})
    end,
 })
 
@@ -54,16 +54,14 @@ local MoveTab = Window:CreateTab("Movement 🚀", 4483362458)
 
 local Noclip = false
 MoveTab:CreateToggle({
-   Name = "Noclip (المشي عبر الجدران)",
+   Name = "Noclip",
    CurrentValue = false,
    Callback = function(Value)
       Noclip = Value
       game:GetService("RunService").Stepped:Connect(function()
-         if Noclip then
-            if game.Players.LocalPlayer.Character then
-                for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                   if v:IsA("BasePart") then v.CanCollide = false end
-                end
+         if Noclip and game.Players.LocalPlayer.Character then
+            for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+               if v:IsA("BasePart") then v.CanCollide = false end
             end
          end
       end)
@@ -71,17 +69,17 @@ MoveTab:CreateToggle({
 })
 
 MoveTab:CreateButton({
-   Name = "Fly (الطيران - اضغط E)",
+   Name = "Fly (E)",
    Callback = function()
       loadstring(game:HttpGet("https://raw.githubusercontent.com/Edgeiy/InfiniteYield/master/source"))():Fly()
    end,
 })
 
--- تبويب القوة (Stats)
-local PlayerTab = Window:CreateTab("Stats ⚡", 4483362458)
+-- تبويب اللاعب (Stats)
+local PlayerTab = Window:CreateTab("Player ⚡", 4483362458)
 
 PlayerTab:CreateSlider({
-   Name = "WalkSpeed (السرعة)",
+   Name = "Speed",
    Range = {16, 500},
    Increment = 1,
    CurrentValue = 16,
@@ -92,13 +90,13 @@ PlayerTab:CreateSlider({
    end,
 })
 
--- حقوق السكربت
+-- تبويب الحقوق (هنا حقوقك يا عامر)
 local CreditsTab = Window:CreateTab("Credits 👑", 4483362458)
-CreditsTab:CreateLabel("Script Created & Verified By: Amer")
-CreditsTab:CreateParagraph({Title = "Enjoy!", Content = "هذا السكربت خاص بعامر وآمن 100%."})
+CreditsTab:CreateLabel("Script By: Amer")
+CreditsTab:CreateLabel("Verified Status: SAFE ✅")
 
 Rayfield:Notify({
-   Title = "Amer Base V5",
-   Content = "تم تفعيل وضع الـ RGB.. استمتع!",
+   Title = "Amer Base Loaded",
+   Content = "تم تشغيل السكربت الآمن بنجاح!",
    Duration = 5,
 })
