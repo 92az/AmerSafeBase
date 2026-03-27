@@ -1,0 +1,77 @@
+--[[
+    AMER SAFE BASE - TESTOL HUB (CLEAN VERSION)
+    Original Source: hoodratleahh
+    Cleaned & Secured by Amer
+]]
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Testol Hub",
+   LoadingTitle = "Amer Safe Base",
+   LoadingSubtitle = "Script Loaded Successfully",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = "TestolHub"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "",
+      RememberJoins = true
+   },
+   KeySystem = false
+})
+
+-- Tab: ESP
+local ESPTab = Window:CreateTab("ESP", 4483362458)
+
+ESPTab:CreateToggle({
+   Name = "Show Distance",
+   CurrentValue = false,
+   Callback = function(Value)
+      _G.ShowDistance = Value
+   end,
+})
+
+ESPTab:CreateToggle({
+   Name = "ESP Teammates",
+   CurrentValue = false,
+   Callback = function(Value)
+      _G.ESPTeammates = Value
+   end,
+})
+
+ESPTab:CreateToggle({
+   Name = "Highlight Murderer",
+   CurrentValue = false,
+   Callback = function(Value)
+      _G.HighlightMurderer = Value
+   end,
+})
+
+ESPTab:CreateToggle({
+   Name = "Highlight Gun Holder (Sheriff/Hero)",
+   CurrentValue = false,
+   Callback = function(Value)
+      _G.HighlightSheriff = Value
+   end,
+})
+
+ESPTab:CreateToggle({
+   Name = "Highlight Innocents",
+   CurrentValue = false,
+   Callback = function(Value)
+      _G.HighlightInnocents = Value
+   end,
+})
+
+-- Other Tabs (As requested in the original script)
+local CombatTab = Window:CreateTab("Combat", 4483362458)
+local ItemSpawnerTab = Window:CreateTab("Item Spawner", 4483362458)
+local CoinDuperTab = Window:CreateTab("Coin Duper", 4483362458)
+
+Rayfield:Notify({
+   Title = "Amer Safe Base",
+   Content = "Script Loaded Successfully",
+   Duration = 5,
+})
